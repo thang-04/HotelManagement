@@ -43,10 +43,7 @@ public class Hotel {
     @Column(name = "CheckoutTime")
     private LocalTime checkoutTime;
 
-    @OneToMany(mappedBy = "hotel")
-    private List<Room> rooms;
 
-    @OneToMany(mappedBy = "hotel")
-    private List<Staff> staffList;
+
 }
 

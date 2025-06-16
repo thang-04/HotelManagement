@@ -33,7 +33,11 @@ public class RoomType {
     @Column(name = "Capacity")
     private Integer capacity;
 
+    @Column(name = "RoomImg")
+    private String roomImg;
+
     @OneToMany(mappedBy = "roomType")
     private List<Room> rooms;
+
 }
 

@@ -5,6 +5,9 @@
 
 <body>
 <!-- offcanvase menu start -->
+
+<th:block th:replace="homePage/fragments/topbar :: topbar"></th:block>
+
 <!--		CHỈ CẦN THAY THẾ MAIN Ở ĐÂY-->
 <div th:replace="~{__${fragmentContent}__}"></div>
 <!-- offcanvase menu end -->
@@ -41,6 +44,7 @@
 <script th:src="@{/homePage/assets/js/gdpr.js}"></script>
 <!-- custom js -->
 <script th:src="@{/homePage/assets/js/main.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

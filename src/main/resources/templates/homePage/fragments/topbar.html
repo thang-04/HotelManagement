@@ -1,0 +1,284 @@
+<th:block th:fragment="topbar" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <!-- header area -->
+    <div class="header__top">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-6 col-md-6">
+                    <div class="social__links">
+                        <a class="link__item gap-10" href="callto:#"><i class="flaticon-phone-flip"></i>
+                            +12505550199</a>
+                        <a class="link__item gap-10" href="mailto:#"><i class="flaticon-envelope"></i> moonlit@gmail.com</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="location">
+                        <a class="link__item gap-10" href="#"><i class="flaticon-marker"></i>280 Augusta Avenue, M5T 2L9
+                            Toronto, Canada</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="main__header header__function">
+        <div class="container">
+            <div class="row">
+                <div class="main__header__wrapper">
+                    <div class="main__nav">
+                        <div class="navigation d-none d-lg-block">
+                            <nav class="navigation__menu" id="main__menu">
+                                <ul class="list-unstyled">
+                                    <li class="navigation__menu--item has-child ">
+                                        <a th:href="@{/home}" class="navigation__menu--item__link">Home</a>
+                                    </li>
+
+                                    <li class="navigation__menu--item has-child ">
+                                        <a th:href="@{/home/room-list}" class="navigation__menu--item__link">Rooms</a>
+                                    </li>
+
+                                    <li class="navigation__menu--item has-child has-arrow">
+                                        <a href="#" class="navigation__menu--item__link">Pages</a>
+                                        <ul class="submenu sub__style" role="menu">
+                                            <li role="menuitem"><a href="about.html">About</a></li>
+                                            <li role="menuitem"><a href="resturant.html">Restaurant</a></li>
+                                            <li role="menuitem"><a href="gallery.html">Gallery</a></li>
+                                            <li role="menuitem"><a href="service.html">Service</a></li>
+                                            <li role="menuitem"><a href="event.html">Event</a></li>
+                                            <li role="menuitem"><a href="activities.html">Activities</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="navigation__menu--item has-child has-arrow">
+                                        <a href="#" class="navigation__menu--item__link">Blog</a>
+                                        <ul class="submenu sub__style" role="menu">
+                                            <li role="menuitem"><a href="blog.html">Blog</a></li>
+                                            <li role="menuitem"><a href="blog-details.html">Blog Details</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="navigation__menu--item">
+                                        <a href="contact.html" class="navigation__menu--item__link">Contact</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                    </div>
+                    <div class="main__logo">
+                        <a th:href="@{/home}"><img class="logo__class" src="/homePage/assets/images/logo/logo.svg"
+                                                  alt="moonlit"></a>
+                    </div>
+
+                    <div class="dropdown main__right" sec:authorize="isAuthenticated()">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle"
+                           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://placehold.co/32x32" alt="User" width="35" height="35"
+                                 class="rounded-circle me-2">
+                            <span th:text="${#authentication.getName()}">John Doe</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="my-courses.html">My Courses</a></li>
+                            <li><a class="dropdown-item" href="wishList.html">Wishlist</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal" >Sign out</a></li>
+                        </ul>
+                    </div>
+                    <div class="main__right" sec:authorize="isAnonymous()">
+                        <a href="#" class="theme-btn btn-style sm-btn border d-none d-lg-block"
+                           aria-label="Login Button"
+                           data-bs-toggle="modal" data-bs-target="#loginModal"><span>Sign In</span></a>
+                        <a href="#" class="theme-btn btn-style sm-btn border d-none d-lg-block"
+                           aria-label="Sign Up Button"
+                           data-bs-toggle="modal" data-bs-target="#signupModal"><span>Sign Up</span></a>
+                        <a href="room-details-1.html" class="theme-btn btn-style sm-btn fill"><span>Book Now</span></a>
+                        <button class="theme-btn btn-style sm-btn fill menu__btn d-lg-none" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                            <span><img src="homePage/assets/images/icon/menu-icon.svg" alt=""></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header area end -->
+    <div class="modal similar__modal fade " id="loginModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="max-content similar__form form__padding">
+                    <div class="d-flex mb-3 align-items-center justify-content-between">
+                        <h6 class="mb-0">Login To Moonlit</h6>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <form id="loginForm" th:action="@{/perform_login}" method="post" class="d-flex flex-column gap-3">
+                        <!-- Error Messages -->
+                        <div id="loginError"></div>
+                        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                            <span th:text="${errorMessage}"></span>
+                        </div>
+                        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+                            <span th:text="${successMessage}"></span>
+                        </div>
+                        <div th:if="${warningMessage}" class="alert alert-warning" role="alert">
+                            <span th:text="${warningMessage}"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="text-dark mb-3">Your Email</label>
+                            <div class="position-relative">
+                                <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-dark mb-3">Password</label>
+                            <div class="position-relative">
+                                <input type="password" name="password" id="password" placeholder="Enter your password"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-between align-items-center ">
+                            <div class="form-check d-flex align-items-center gap-2">
+                                <input class="form-check-input mt-0" type="checkbox" name="remember-me"
+                                       id="remember-me">
+                                <label class="form-check-label mb-0" for="remember-me">
+                                    Remember me
+                                </label>
+                            </div>
+                            <a href="#" class="forgot__password text-para" data-bs-toggle="modal"
+                               data-bs-target="#forgotModal">Forgot Password?</a>
+                        </div>
+                        <div class="form-group my-3">
+                            <button type="submit" class="theme-btn btn-style sm-btn fill w-100"><span>Login</span>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="d-block has__line text-center">
+                        <p>Or</p>
+                    </div>
+                    <div class="d-flex gap-4 flex-wrap justify-content-center mt-20 mb-20">
+                        <div class="is__social google">
+                            <button class="theme-btn btn-style sm-btn"><span>Continue with Google</span></button>
+                        </div>
+                        <div class="is__social facebook">
+                            <button class="theme-btn btn-style sm-btn"><span>Continue with Facebook</span></button>
+                        </div>
+                    </div>
+                    <span class="d-block text-center ">Don`t have an account? <a href="#" data-bs-target="#signupModal"
+                                                                                 data-bs-toggle="modal"
+                                                                                 class="text-primary">Sign Up</a> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-primary">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- signup form -->
+    <div class="modal similar__modal fade " id="signupModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="max-content similar__form form__padding">
+                    <div class="d-flex mb-3 align-items-center justify-content-between">
+                        <h6 class="mb-0">Create A Free Account</h6>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+
+                    <form action="#" class="d-flex flex-column gap-3">
+                        <div class="form-group">
+                            <label for="sname" class=" text-dark mb-3">Your Name</label>
+                            <div class="position-relative">
+                                <input type="text" name="sname" id="sname" placeholder="Candidate" required>
+                                <i class="fa-light fa-user icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signemail" class=" text-dark mb-3">Your Email</label>
+                            <div class="position-relative">
+                                <input type="email" name="signemail" id="signemail" placeholder="Enter your email"
+                                       required>
+                                <i class="fa-sharp fa-light fa-envelope icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="spassword" class=" text-dark mb-3">Password</label>
+                            <div class="position-relative">
+                                <input type="password" name="spassword" id="spassword" placeholder="Enter your password"
+                                       required>
+                                <i class="fa-light fa-lock icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group my-3">
+                            <button class="theme-btn btn-style sm-btn fill w-100"><span>Register</span></button>
+                        </div>
+                    </form>
+                    <div class="d-block has__line text-center">
+                        <p>Or</p>
+                    </div>
+                    <div class="d-flex flex-wrap justify-content-center gap-4 mt-20 mb-20">
+                        <div class="is__social google">
+                            <button class="theme-btn btn-style sm-btn"><span>Continue with Google</span></button>
+                        </div>
+                        <div class="is__social facebook">
+                            <button class="theme-btn btn-style sm-btn"><span>Continue with Facebook</span></button>
+                        </div>
+                    </div>
+                    <span class="d-block text-center ">Have an account? <a href="#" data-bs-target="#loginModal"
+                                                                           data-bs-toggle="modal"
+                                                                           class="text-primary">Login</a> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- forgot password form -->
+    <div class="modal similar__modal fade " id="forgotModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="max-content similar__form form__padding">
+                    <div class="d-flex mb-3 align-items-center justify-content-between">
+                        <h6 class="mb-0">Forgot Password</h6>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <form action="#" class="d-flex flex-column gap-3">
+                        <div class="form-group">
+                            <label for="fmail" class=" text-dark mb-3">Your Email</label>
+                            <div class="position-relative">
+                                <input type="email" name="email" id="fmail" placeholder="Enter your email" required>
+                                <i class="fa-sharp fa-light fa-envelope icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group my-3">
+                            <button class="theme-btn btn-style sm-btn fill w-100"><span>Reset Password</span></button>
+                        </div>
+                    </form>
+
+                    <span class="d-block text-center ">Remember Your Password?
+                <a href="#" data-bs-target="#loginModal" data-bs-toggle="modal" class="text-primary">Login</a> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
